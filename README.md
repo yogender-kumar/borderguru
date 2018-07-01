@@ -1,6 +1,6 @@
 # borderguru API
 
-### Structure ###
+### API Structure ###
 ```
 +-- log
 |   +-- *.log
@@ -26,10 +26,9 @@
 ```
 npm install
 ```
-# Dependencies
-MongoDB is required to run the API's. Make sure mongoDB is running on default port i.e. `:27017`
-
 * Start application after success full installation
 ```
 npm start
 ```
+# Dependencies
+MongoDB is required to run the API's. Make sure mongoDB is running on default port i.e. `:27017`

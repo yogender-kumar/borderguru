@@ -1,0 +1,179 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "BorderGuru API's",
+    "description": "Full Stack Developer assignment",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Orders-V1",
+      "description": "API for orders in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/orders": {
+      "post": {
+        "tags": [
+          "Orders-V1"
+        ],
+        "description": "Create new order in system",
+        "parameters": [
+          {
+            "name": "order",
+            "in": "body",
+            "description": "Order that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New order is created",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Orders-V1"
+        ],
+        "parameters":[
+          {
+            "in": "query",
+            "name": "customerName",
+            "required": false,
+            "description": "Orders by customer name (optional)"
+          },
+          {
+            "in": "query",
+            "name": "customerAddress",
+            "required": false,
+            "description": "Orders by customer address  (optional)"
+          }
+        ],
+        "summary": "Get all orders in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      }
+    },
+    "/orders/{orderId}": {
+      "parameters": [
+        {
+          "name": "orderId",
+          "in": "path",
+          "required": true,
+          "description": "ID of order that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Orders-V1"
+        ],
+        "summary": "Get order with given ID",
+        "responses": {
+          "200": {
+            "description": "Order is found",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete order with given ID",
+        "tags": [
+          "Orders-V1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Order is deleted",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update order with give ID",
+        "tags": [
+          "Orders-V1"
+        ],
+        "parameters": [
+          {
+            "name": "order",
+            "in": "body",
+            "description": "Order with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order is updated",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Order": {
+      "required": [
+        "customerName","customerAddress","itemName","price","currency"
+      ],
+      "properties": {
+        "customerName": {
+          "type": "string"
+        },
+        "customerAddress": {
+          "type": "string"
+        },
+        "itemName": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string"
+        }
+      }
+    },
+    "Orders": {
+      "type": "array",
+      "$ref": "#/definitions/Order"
+    }
+  }
+}

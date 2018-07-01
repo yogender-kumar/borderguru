@@ -1,6 +1,7 @@
 export const SERVER = {
     PORT: 3000,
-    ROUTES_DIR: 'routes'
+    ROUTES_DIR: 'routes',
+    API_PATH_PREFIX: '/api'
 }
 
 export const DB = {
@@ -11,7 +12,7 @@ export const DB = {
 }
 
 export const LOGGER = {
-    DEFAULT_LEVEL: 'debut',
+    DEFAULT_LEVEL: 'silly',
     ERROR_LEVEL: 'error',
     COLORS: {
         error: 'red',

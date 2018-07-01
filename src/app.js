@@ -2,10 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import fs from 'fs';
 import path from 'path';
+import swaggerUi from 'swagger-ui-express';
 import db from './utils/db';
 
 import { SERVER } from './constants';
 import logger from './utils/logger';
+const swaggerDocument = require('../swagger.json');
 
 const app = express();
 
@@ -13,30 +15,43 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Swager middleware for API documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 /**
 * Initialize Database connection
 * On error exit process
 * On success start the application
 */
 db((err)=>{
+
     if(err){
-        logger.error(err.message);
+        logger.error(`[app] DB connect error: ${err.message}`);
+        
         process.exit(1);
     }else{
-        logger.info('Connected to db');
-        app.listen( SERVER.PORT, err => {
+        logger.debug('[app] Connected to db');
+
+        let server = app.listen( SERVER.PORT, err => {
+
             if(err){
-                logger.error(err.message);
+                logger.error(`[app] app start error: ${err.message}`);
                 process.exit(1);
             }
-
-            logger.info(`Start loading routes from "${SERVER.ROUTES_DIR}" directory`);
-            fs.readdirSync(path.join(__dirname, SERVER.ROUTES_DIR)).map( file => {
-                require('./' + SERVER.ROUTES_DIR + '/' + file)(app);
+            
+            logger.debug(`[app] Start loading routes from "${SERVER.ROUTES_DIR}" directory`);
+            fs.readdirSync(path.join(__dirname,SERVER.ROUTES_DIR))
+            .map( file => {
+                app.use(
+                    SERVER.API_PATH_PREFIX,
+                    require('./' + SERVER.ROUTES_DIR + '/' + file)
+                );
             });
-
-            logger.info(`API's are running on port - ${SERVER.PORT}`);
+            
+            logger.info(`API's are running on  - ${server.address().address}${SERVER.PORT}${SERVER.API_PATH_PREFIX}`);
         });
+
     }
+
 });
 
