@@ -41,7 +41,7 @@ export const getNextSequenceValue = function(next, seqId, toUpdate) {
             logger.error(`[getNextSequenceValue] query error for seqId: ${seqId}`, err.message);
             return next(err);
         }
-        doc[toUpdate] = sequence ? sequence.seq : 1;
+        doc[toUpdate] = sequence ? (sequence.seq + 1) : 1;
         next();
     });
 
@@ -56,7 +56,7 @@ export const setNextSequenceValue = function(doc, seqId) {
 
     logger.debug(`[setNextSequenceValue] seqId: ${seqId} , doc: ${doc}`);
     Sequence.findByIdAndUpdate(seqId,
-        {seq: doc.id + 1 },
+        {$inc: {seq: 1 }},
         {upsert: true},
         (err, sequence) => {
         logger.debug(`[setNextSequenceValue] sequence: ${sequence}`);

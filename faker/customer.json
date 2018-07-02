@@ -1,0 +1,42 @@
+[{
+    "_id": "c001",
+    "customerName": "Peter Lustig",
+    "customerAddress": [{
+        "_id": "c1_a001",
+        "address": "Steindamm 70"
+    },{
+        "_id": "c1_a002",
+        "address": "Steindamm 80"
+    },{
+        "_id": "c1_a003",
+        "address": "Steindamm 90"
+    }]
+},{
+    "_id": "c002",
+    "customerName": "John Smith",
+    "customerAddress": [{
+        "_id": "c2_a001",
+        "address": "Reeperbahn 153"
+    }]
+},{
+    "_id": "c003",
+    "customerName": "Ted Justice",
+    "customerAddress": [{
+        "_id": "c3_a001",
+        "address": "Lagerstrasse 11"
+    }]
+},{
+    "_id": "c004",
+    "customerName": "Friedrich",
+    "customerAddress": [{
+        "_id": "c4_a001",
+        "address": "Unnastrasse 48"
+    }]
+},{
+    "_id": "c005",
+    "customerName": "Jakob",
+    "customerAddress": [{
+        "_id": "c5_a001",
+        "address": "Wiesingerweg 25"
+    }]
+}]

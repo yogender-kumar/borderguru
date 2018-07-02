@@ -8,7 +8,11 @@ export const DB = {
     PROTOCOL: "mongodb://",
     DOMAIN: "localhost",
     PORT: ":27017",
-    DATABASE: "/borderGuru"
+    DATABASE: "borderGuru",
+    COLLECTIONS: {
+        ORDER: "orders",
+        CUSTOMER: "customers"
+    }
 }
 
 export const LOGGER = {
@@ -30,4 +34,9 @@ export const LOGGER = {
         debug: 4, 
         silly: 5 
       }
+}
+
+export const EXPOSED_NODE = {
+    ORDER: '_id customerId addressId itemName price currency',
+    CUSTOMER: '_id customerName customerAddress'
 }

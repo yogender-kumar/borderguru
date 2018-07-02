@@ -1,0 +1,25 @@
+[{
+    "itemName": "Macbook",
+    "price": "1700",
+    "currency": "EUR"
+},{
+    "itemName": "Book \"Guide to Hamburg\"",
+    "price": "20",
+    "currency": "EUR"
+},{
+    "itemName": "Book \"Cooking 101\"",
+    "price": "10",
+    "currency": "EUR"
+},{
+    "itemName": "Inline Skates",
+    "price": "75",
+    "currency": "EUR"
+},{
+    "itemName": "Playstation 4",
+    "price": "270",
+    "currency": "EUR"
+},{
+    "itemName": "Flux compensator",
+    "price": "1700",
+    "currency": "EUR"
+}]

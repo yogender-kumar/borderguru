@@ -15,6 +15,10 @@
     {
       "name": "Orders-V1",
       "description": "API for orders in the system"
+    },
+    {
+      "name": "Item-V1",
+      "description": "API for items in the system"
     }
   ],
   "schemes": [
@@ -58,20 +62,6 @@
       "get": {
         "tags": [
           "Orders-V1"
-        ],
-        "parameters":[
-          {
-            "in": "query",
-            "name": "customerName",
-            "required": false,
-            "description": "Orders by customer name (optional)"
-          },
-          {
-            "in": "query",
-            "name": "customerAddress",
-            "required": false,
-            "description": "Orders by customer address  (optional)"
-          }
         ],
         "summary": "Get all orders in system",
         "responses": {
@@ -122,7 +112,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "summary": "Update order with give ID",
         "tags": [
           "Orders-V1"
@@ -146,18 +136,81 @@
           }
         }
       }
+    },
+    "/orders/byCustomer/{customerId}": {
+      "parameters": [
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,
+          "description": "ID of customer for whome we want to search order",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Orders-V1"
+        ],
+        "summary": "Get order with given customer ID",
+        "responses": {
+          "200": {
+            "description": "Order is found",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      }
+    },
+    "/orders/byAddress/{addressId}": {
+      "parameters": [
+        {
+          "name": "addressId",
+          "in": "path",
+          "required": true,
+          "description": "ID of customer for which we want to search order",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Orders-V1"
+        ],
+        "summary": "Get order with given address ID",
+        "responses": {
+          "200": {
+            "description": "Order is found",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      }
+    },
+    "/item/groupByName": {
+      "get": {
+        "tags": [
+          "Item-V1"
+        ],
+        "summary": "Get item count group by name from orders collection & shorted by count",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "definitions": {
     "Order": {
       "required": [
-        "customerName","customerAddress","itemName","price","currency"
+        "customerId", "addressId", "itemName","price","currency"
       ],
       "properties": {
-        "customerName": {
+        "customerId": {
           "type": "string"
         },
-        "customerAddress": {
+        "addressId": {
           "type": "string"
         },
         "itemName": {
