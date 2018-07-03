@@ -38,5 +38,6 @@ export const LOGGER = {
 
 export const EXPOSED_NODE = {
     ORDER: '_id customerId addressId itemName price currency',
-    CUSTOMER: '_id customerName customerAddress'
+    CUSTOMER: '_id customerName customerAddress',
+    ADDRESS: '_id address'
 }

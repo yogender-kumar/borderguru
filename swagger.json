@@ -19,6 +19,10 @@
     {
       "name": "Item-V1",
       "description": "API for items in the system"
+    },
+    {
+      "name": "Customer-V1",
+      "description": "API for customers in the system"
     }
   ],
   "schemes": [
@@ -137,7 +141,7 @@
         }
       }
     },
-    "/orders/byCustomer/{customerId}": {
+    "/orders/byCustomerId/{customerId}": {
       "parameters": [
         {
           "name": "customerId",
@@ -162,7 +166,7 @@
         }
       }
     },
-    "/orders/byAddress/{addressId}": {
+    "/orders/byAddressId/{addressId}": {
       "parameters": [
         {
           "name": "addressId",
@@ -199,6 +203,153 @@
           }
         }
       }
+    },
+    "/customers/{customerId}": {
+      "parameters": [
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,
+          "description": "ID of customer that we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Customer-V1"
+        ],
+        "summary": "Get customer with given ID",
+        "responses": {
+          "200": {
+            "description": "Customer is found",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update customer with give ID",
+        "tags": [
+          "Customer-V1"
+        ],
+        "parameters": [
+          {
+            "name": "customer",
+            "in": "body",
+            "description": "Customer with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer is updated",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        }
+      }
+    },
+    "/customers/addAddress/{customerId}": {
+      "parameters": [
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,
+          "description": "ID of customer that we want to find",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Customer-V1"
+        ],
+        "description": "Create new Address for the given customer in system",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "body",
+            "description": "Address that we want to create for the customer",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New address is created for customer",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        }
+      }
+    },
+    "/customers/updateAddress/{addressId}": {
+      "parameters": [
+        {
+          "name": "addressId",
+          "in": "path",
+          "required": true,
+          "description": "ID of address that we want to update",
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "summary": "Update address with give ID",
+        "tags": [
+          "Customer-V1"
+        ],
+        "parameters": [
+          {
+            "name": "address",
+            "in": "body",
+            "description": "Address with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Address is updated",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        }
+      }
+    },
+    "/customers/deleteAddress/{addressId}": {
+      "parameters": [
+        {
+          "name": "addressId",
+          "in": "path",
+          "required": true,
+          "description": "ID of address that we want to delete",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "summary": "Delete address with given ID",
+        "tags": [
+          "Customer-V1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Address is deleted",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -224,9 +375,21 @@
         }
       }
     },
-    "Orders": {
-      "type": "array",
-      "$ref": "#/definitions/Order"
+    "Customer": {
+      "required": ["customerName"],
+      "properties": {
+        "customerName":{
+          "type": "string"
+        }
+      }
+    },
+    "Address": {
+      "required": ["address"],
+      "properties": {
+        "address": {
+            "type": "string"
+          }
+      }
     }
   }
 }

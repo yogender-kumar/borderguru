@@ -2,41 +2,41 @@
     "_id": "c001",
     "customerName": "Peter Lustig",
     "customerAddress": [{
-        "_id": "c1_a001",
+        "deleted": false,
         "address": "Steindamm 70"
     },{
-        "_id": "c1_a002",
+        "deleted": false,
         "address": "Steindamm 80"
     },{
-        "_id": "c1_a003",
+        "deleted": false,
         "address": "Steindamm 90"
     }]
 },{
     "_id": "c002",
     "customerName": "John Smith",
     "customerAddress": [{
-        "_id": "c2_a001",
+        "deleted": false,
         "address": "Reeperbahn 153"
     }]
 },{
     "_id": "c003",
     "customerName": "Ted Justice",
     "customerAddress": [{
-        "_id": "c3_a001",
+        "deleted": false,
         "address": "Lagerstrasse 11"
     }]
 },{
     "_id": "c004",
     "customerName": "Friedrich",
     "customerAddress": [{
-        "_id": "c4_a001",
+        "deleted": false,
         "address": "Unnastrasse 48"
     }]
 },{
     "_id": "c005",
     "customerName": "Jakob",
     "customerAddress": [{
-        "_id": "c5_a001",
+        "deleted": false,
         "address": "Wiesingerweg 25"
     }]
 }]

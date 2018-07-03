@@ -2,18 +2,22 @@ import fs from 'fs';
 import path from 'path';
 import mongoose, { Schema } from 'mongoose';
 import timestamps from 'mongoose-timestamp';
+import stringQuery from 'mongoose-string-query';
+import mongooseDelete from 'mongoose-delete';
 
 import { DB } from '../../constants'
 
 const CustomerSchema = new Schema({
     _id: String,
-    order: [String],
     customerName: {
         type: String,
         required: true
     },
     customerAddress: [{
-        _id: String,
+        deleted: {
+            type: Boolean,
+            default: false
+        },
         address:{
             type: String,
             required: true
@@ -23,6 +27,8 @@ const CustomerSchema = new Schema({
 
 // automatically adds createdAt and updatedAt timestamps
 CustomerSchema.plugin(timestamps);
+CustomerSchema.plugin(stringQuery);
+CustomerSchema.plugin(mongooseDelete, {overrideMethods: true, validateBeforeDelete: false});
 
 const Customer = mongoose.model(DB.COLLECTIONS.CUSTOMER, CustomerSchema);
 export default Customer;

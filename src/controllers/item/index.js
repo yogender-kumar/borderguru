@@ -4,13 +4,13 @@ import logger from '../../utils/logger';
 
 
 /**
-* Group item by name from orders and sorting by number of occurance & name
+* Group item by name from orders and sorting by number of occurance, name
 * @param {object} req 
 * @param {object} res 
 */
 exports.getItemGroupByName = (req, res) => {
 
-    logger.debug(`[Order GetItem]`);
+    logger.debug(`[getItemGroupByName] init query`);
 
     Order.aggregate()
     .group({
@@ -20,7 +20,7 @@ exports.getItemGroupByName = (req, res) => {
     })
     .sort({'count': -1, '_id': 1})
     .then((rec) => {
-        logger.debug(`[Order GetItem] item length: ${rec.length}`);
+        logger.debug(`[getItemGroupByName] item length: ${rec.length}`);
         res.json(rec);
     });
 };

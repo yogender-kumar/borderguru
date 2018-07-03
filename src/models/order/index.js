@@ -42,7 +42,7 @@ OrderSchema.pre('save', function(next) {
     //Validate if Customer exist with provided customerId
     Customer.find(
         {_id: this.customerId},
-        {customerAddress: { $elemMatch: { _id: this.addressId}}},
+        {customerAddress: { $elemMatch: { _id: this.addressId, deleted: false}}},
         (err, customer)=>{
             
             logger.debug(`[OrderSchama] PreSave query response: ${customer}`);

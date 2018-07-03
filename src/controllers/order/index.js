@@ -36,7 +36,7 @@ exports.list = (req, res) => {
 * @param {object} req 
 * @param {object} res 
 */
-exports.get = (req, res) => {
+exports.getById = (req, res) => {
     logger.debug(`[Order Get] orderId: ${req.params.orderId}`);
     
     Order.findById(req.params.orderId)
@@ -172,9 +172,10 @@ exports.getByCustomerId = (req, res) => {
 * @param {object} res 
 */
 exports.getByAddressId = (req, res) => {
-    logger.debug(`[Order GetByAddress] orderId: ${req.params.orderId}`);
+
+    logger.debug(`[Order GetByAddress] addressId: ${req.params.addressId}`);
     
-    Order.find({addressId: req.params.orderId})
+    Order.find({addressId: req.params.addressId})
     .select(EXPOSED_NODE.ORDER)
     .then( order => {
         logger.debug(`[Order GetByAddress] query result: ${JSON.stringify(order)}`);
@@ -184,6 +185,7 @@ exports.getByAddressId = (req, res) => {
         logger.error(`[Order GetByAddress] query error: ${err.message}`);
         res.status(422).send(err.message);
     });
+    
 };
 
 
