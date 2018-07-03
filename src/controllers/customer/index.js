@@ -157,17 +157,23 @@ exports.deleteAddress = (req, res) => {
     });
 };
 
-exports.getPaidAmount = (req, res) => {
-    logger.debug(`[getPaidAmount] customerId: ${req.params.customerId}`);
+/**
+* Get total amount paid by a customer using customerId
+* @param {object} req 
+* @param {object} res 
+*/
+exports.getTotalAmount = (req, res) => {
+    logger.debug(`[getTotalAmount] customerId: ${req.params.customerId}`);
 
     Order.aggregate()
     .match({customerId: req.params.customerId})
     .group({
-        _id: null,
-        price: {$sum: '$price'}
+        _id: "$customerId",
+        totalAmount: {$sum: '$price'},
+        totalProducts: {$sum: 1}
     })
     .then((rec) => {
-        logger.debug(`[getPaidAmount] item length: ${rec.length}`);
+        logger.debug(`[getTotalAmount] item length: ${rec.length}`);
         res.json(rec);
     });
 };

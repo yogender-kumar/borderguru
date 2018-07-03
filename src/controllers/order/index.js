@@ -91,6 +91,9 @@ exports.post = (req, res) => {
 */
 exports.patch = (req, res) => {
     logger.debug(`[Order Put] orderId: ${req.params.orderId}, payload: ${JSON.stringify(req.body)}`);
+
+    delete req.body.customerId;
+    delete req.body.addressId;
     
     Order.findByIdAndUpdate(req.params.orderId, req.body, {new: true})
     .select(EXPOSED_NODE.ORDER)

@@ -36,11 +36,25 @@
   ],
   "paths": {
     "/orders": {
+      "get": {
+        "tags": [
+          "Orders-V1"
+        ],
+        "summary": "Get all orders in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Orders-V1"
         ],
-        "description": "Create new order in system",
+        "summary": "Create new order in system",
         "parameters": [
           {
             "name": "order",
@@ -57,20 +71,6 @@
         "responses": {
           "200": {
             "description": "New order is created",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Orders-V1"
-        ],
-        "summary": "Get all orders in system",
-        "responses": {
-          "200": {
-            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Order"
             }
@@ -102,20 +102,6 @@
           }
         }
       },
-      "delete": {
-        "summary": "Delete order with given ID",
-        "tags": [
-          "Orders-V1"
-        ],
-        "responses": {
-          "200": {
-            "description": "Order is deleted",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          }
-        }
-      },
       "patch": {
         "summary": "Update order with give ID",
         "tags": [
@@ -134,6 +120,20 @@
         "responses": {
           "200": {
             "description": "Order is updated",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete order with given ID",
+        "tags": [
+          "Orders-V1"
+        ],
+        "responses": {
+          "200": {
+            "description": "Order is deleted",
             "schema": {
               "$ref": "#/definitions/Order"
             }
@@ -267,7 +267,7 @@
         "tags": [
           "Customer-V1"
         ],
-        "description": "Create new Address for the given customer in system",
+        "summary": "Create new Address for the given customer in system",
         "parameters": [
           {
             "name": "address",
@@ -347,6 +347,28 @@
             "schema": {
               "$ref": "#/definitions/Address"
             }
+          }
+        }
+      }
+    },
+    "/customers/getTotalAmount/{customerId}": {
+      "parameters": [
+        {
+          "name": "customerId",
+          "in": "path",
+          "required": true,
+          "description": "ID of customer to get total amount",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Customer-V1"
+        ],
+        "summary": "Get total amount paid by the customer",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
